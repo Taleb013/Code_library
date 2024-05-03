@@ -1,0 +1,16 @@
+int grundy[10005];
+bool vis[N];
+int findGrandy(int val)
+{
+  memset(vis,false,sizeof(vis));
+  if(val<3)return grundy[val]=0;
+  if(grundy[val]!=-1)return grundy[val];
+  for(int i=1;i*2<val;i++)
+  {
+    vis[grundy[i]^grundy[val-i]]=true;
+  }
+  for(int j=0;j<N;j++)
+  {
+    if(vis[j]==false)return grundy[val]=j;
+  }
+}
