@@ -1,0 +1,11 @@
+long long binpow(long long base,long long pow)
+{
+  long long res=1;
+  while(pow>0)
+  {
+    if(pow&1) res *= base; //modulus here
+    base *= base;          //modulus here
+    pow >>= 1;
+  }
+  return res;
+}
