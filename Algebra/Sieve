@@ -1,0 +1,14 @@
+vector<long long>prime;  //for store primes
+bool vis[N];
+void sieve()
+{
+   for(int i=2;i<N;i++)
+   {
+    if(!vis[i])
+    {
+      prime.push_back(i);
+      for(int j=i+i;j<N;j+=i)     //nearly o(n) time use
+        vis[j]=1;
+    }
+   }
+}
