@@ -1,0 +1,28 @@
+void add(int x){ ans+=a[x];  }
+void sub(int x){ans-=a[x];}
+ll cost(int l, int r)
+{ 
+    while (lptr > l)add(--lptr); 
+    while (rptr < r) add(++rptr); 
+    while (rptr > r) sub(rptr--);
+    while (lptr < l) sub(lptr++);
+        return ans;
+}
+void compute(int l,int r,int optl,int optr)
+{  
+   if(l>r)return;
+   int m=(l+r)>>1;
+   int opt;
+   new_dp[m]=1e18;
+   for(int i=optl;i<=min(optr,m);i++)
+   { 
+    ll x=dp[i-1]+pow(cost(i,m),2LL);
+    if(new_dp[m]>x)
+    {
+        new_dp[m]=x;
+        opt=i;
+    }
+   }
+   compute(l,m-1,optl,opt);
+   compute(m+1,r,opt,optr);
+}
