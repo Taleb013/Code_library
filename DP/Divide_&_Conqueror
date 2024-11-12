@@ -1,3 +1,8 @@
+ll a[N];
+ll dp[N];
+ll new_dp[N];
+ll ans;
+int lptr=0,rptr=0;
 void add(int x){ ans+=a[x];  }
 void sub(int x){ans-=a[x];}
 ll cost(int l, int r)
@@ -6,7 +11,7 @@ ll cost(int l, int r)
     while (rptr < r) add(++rptr); 
     while (rptr > r) sub(rptr--);
     while (lptr < l) sub(lptr++);
-        return ans;
+        return (1LL*(r-l+1)*ans);
 }
 void compute(int l,int r,int optl,int optr)
 {  
@@ -16,7 +21,7 @@ void compute(int l,int r,int optl,int optr)
    new_dp[m]=1e18;
    for(int i=optl;i<=min(optr,m);i++)
    { 
-    ll x=dp[i-1]+pow(cost(i,m),2LL);
+    ll x=dp[i-1]+cost(i,m);
     if(new_dp[m]>x)
     {
         new_dp[m]=x;
