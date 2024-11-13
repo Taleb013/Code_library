@@ -1,0 +1,14 @@
+ll inv_mod(ll a, ll p, ll mod)
+{
+    long long ans = 1;
+    while (p > 0)
+    {
+        if (p % 2 == 1)
+        {
+            ans = (ans * a) % mod;
+        }
+        a = (a * a) % mod;
+        p /= 2;
+    }
+    return ans;
+}
