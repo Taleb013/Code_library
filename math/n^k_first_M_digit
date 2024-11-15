@@ -3,5 +3,5 @@ ll n,k;
   double c=(double)log10(n*1.0)*k;
   ll  r=(long)c;
   c=c-r*1.0;
-  ll ans=(1000.0*pow(10.0,c));
+  ll ans=(1000.0*pow(10.0,c)); //10^m-1=1000 here
   cout<<ans<<endl;
