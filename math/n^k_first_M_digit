@@ -1,0 +1,7 @@
+ll n,k;
+  cin>>n>>k;
+  double c=(double)log10(n*1.0)*k;
+  ll  r=(long)c;
+  c=c-r*1.0;
+  ll ans=(1000.0*pow(10.0,c));
+  cout<<ans<<endl;
