@@ -1,9 +1,0 @@
-ll f[N];
-void fact()
-{
-    f[0]=f[1]=1;
-    for(int i=2;i<N;i++)
-    {
-        f[i]=(1LL*i*f[i-1])%mod;
-    }
-}
