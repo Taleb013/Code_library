@@ -1,0 +1,13 @@
+ int l,r;
+   vll contribution(n+2,0);
+   while (q--)
+   {
+    cin>>l>>r;
+    contribution[l]+=1;
+    contribution[r+1]-=1;
+   } vll b;
+   for(int i=1;i<=n;i++)
+   {
+    contribution[i]+=contribution[i-1];
+    b.push_back(contribution[i]);
+   }
