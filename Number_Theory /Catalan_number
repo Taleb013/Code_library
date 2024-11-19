@@ -1,0 +1,36 @@
+ll f[N];
+void fact()
+{
+    f[0]=f[1]=1;
+    for(int i=2;i<N;i++)
+    {
+        f[i]=(1LL*i*f[i-1])%mod;
+    }
+}
+ll inv_mod(ll a, ll p, ll mod)
+{
+    long long ans = 1;
+    while (p > 0)
+    {
+        if (p % 2 == 1)
+        {
+            ans = (ans * a) % mod;
+        }
+        a = (a * a) % mod;
+        p /= 2;
+    }
+    return ans;
+}
+
+void solve()
+{
+   ll n;
+   cin>>n;
+   n-=2;
+   ll ans=f[2*n];
+   ans=(ans*inv_mod(f[n],mod-2,mod))%mod;
+   ans=(ans*inv_mod(f[n],mod-2,mod))%mod;
+   ans=(ans*inv_mod(n+1,mod-2,mod))%mod;
+
+   cout<<ans<<endl;
+}
