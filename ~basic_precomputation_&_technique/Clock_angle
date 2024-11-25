@@ -1,0 +1,10 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+	double H, M;
+	cin >> H >> M;
+	cout<<fixed<<setprecision(4);
+	double angle =(60.0*H-11.0*M)/2.0;
+	cout<<min(angle ,360-angle)<<endl;
+	return 0;
+}
