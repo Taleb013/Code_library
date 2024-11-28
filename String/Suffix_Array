@@ -1,0 +1,37 @@
+void solve()
+{
+   string s; cin>>s; s+='$';
+   int n=s.length();
+   vector<pair<char,int>>v(n);
+   vector<int>p(n),c(n);
+   {  // for k=0 
+    for(int i=0; i<n; i++){ v[i]={s[i],i}; }
+    sort(v.begin(), v.end());
+    for(int i=0;i<n;i++)p[i]=v[i].S;
+    c[p[0]]=0;
+    for(int i=1;i<n;i++)
+    {
+      if(v[i].F==v[i-1].F){ c[p[i]]=c[p[i-1]];}
+      else { c[p[i]]=c[p[i-1]]+1;}
+    }
+   }
+   int k=0;
+   vector<pair<pair<int,int>,int>>a(n);
+   while((1<<k)<n)
+   {
+     for(int i=0;i<n;i++)
+     {
+      a[i]={{c[i],c[(i+(1<<k))%n]},i};
+     }
+     sort(a.begin(),a.end());
+      for(int i=0;i<n;i++)p[i]=a[i].S;
+    c[p[0]]=0;
+    for(int i=1;i<n;i++)
+    {
+      if(a[i].F==a[i-1].F){ c[p[i]]=c[p[i-1]];}
+      else { c[p[i]]=c[p[i-1]]+1;}
+    }
+    k++;
+   }
+   for(int i=0;i<n;i++) cout<<p[i]<<' ';
+}
