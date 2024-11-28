@@ -1,0 +1,39 @@
+void radix_sort(vector<pair<pair<int, int>, int>> &a)
+{
+  int n = a.size();
+  {
+    vector<int> cnt(n, 0);
+    for (auto i : a)
+      cnt[i.F.S]++;
+    vector<pair<pair<int, int>, int>> new_a(n);
+    vector<int> p(n, 0);
+    p[0] = 0;
+    for (int i = 1; i < n; i++)
+      p[i] = p[i - 1] + cnt[i - 1];
+    for (auto i : a)
+    {
+      int x = i.F.S;
+      new_a[p[x]] = i;
+      p[x]++;
+    }
+    a = new_a;
+  }
+
+  {
+    vector<int> cnt(n, 0);
+    for (auto i : a)
+      cnt[i.F.F]++;
+    vector<pair<pair<int, int>, int>> new_a(n);
+    vector<int> p(n, 0);
+    p[0] = 0;
+    for (int i = 1; i < n; i++)
+      p[i] = p[i - 1] + cnt[i - 1];
+    for (auto i : a)
+    {
+      int x = i.F.F;
+      new_a[p[x]] = i;
+      p[x]++;
+    }
+    a = new_a;
+  }
+}
