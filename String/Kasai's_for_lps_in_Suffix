@@ -1,0 +1,25 @@
+ {  // kasai Algorithms for lcp in suffix o(n)
+   for(int i=0;i<n;i++)cout<<p[i]<<' '; nl;
+   vector<int> lcp(n, 0), rank(n, 0);
+
+    for (int i = 0; i < n; i++) {
+        rank[p[i]] = i;
+    }
+
+     k = 0;
+    for (int i = 0; i < n; i++) {
+        if (rank[i] == n - 1) {
+            k = 0;
+            continue;
+        }
+        int j = p[rank[i] + 1];
+        while (i + k < n && j + k < n && s[i + k] == s[j + k]) {
+            k++;
+        }
+        lcp[rank[i]] = k;
+        if (k > 0) k--;
+    }
+
+    for(int i = 0; i < n-1; i++) cout<<lcp[i]<<' ';
+   }
+  
