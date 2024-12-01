@@ -1,0 +1,1 @@
+1. ways=nCr(n,k)*nCr(n,k)* k!;   // n*n checkerbord k rook place without attack each other
