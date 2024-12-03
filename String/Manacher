@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+vector<int> manacher_odd(string s) {  //for even just add '#' char before every character
+    int n = s.size();
+    s = "$" + s + "^";
+    vector<int> p(n + 2);
+    int l = 1, r = 1;
+    for(int i = 1; i <= n; i++) {
+        p[i] = max(0, min(r - i, p[l + (r - i)]));
+        while(s[i - p[i]] == s[i + p[i]]) {
+            p[i]++;
+        }
+        if(i + p[i] > r) {
+            l = i - p[i], r = i + p[i];
+        }
+    }
+    return vector<int>(begin(p) + 1, end(p) - 1);
+}
+
+int main() {
+    string s;   //finding longest palingdrome
+    cin >> s;
+    int idx=0,sz=0;
+    vector<int>ans1=manacher_odd(s);
+    for(int i=0;i<s.size();i++){ if(2*ans1[i]-1>sz)idx=i-ans1[i]+1,sz=2*ans1[i]-1;}
+    string t;
+    for(int i=0;i<s.size();i++){ t+='#';t+=s[i];} t+='#'; //convert odd manacher to even 
+    vector<int>ans2=manacher_odd(t); 
+    for(int i=0;i<ans2.size();i+=2)if(ans2[i]-1>sz)sz=ans2[i]-1,idx=i/2-sz/2;
+    string ans=s.substr(idx,sz);  //palindrome here size is sz
+    cout<<ans<<endl;
+    
+    return 0;
+}
