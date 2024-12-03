@@ -1,4 +1,48 @@
-void solve()
+#include <bits/stdc++.h>  //submitted by taleb
+using namespace std;
+#define ll long long
+const ll mod =1e9+7;
+const ll N = 1e5+5;
+void radix_sort(vector<pair<pair<int, int>, int>> &a) //optimization suing counting 
+{
+  int n = a.size();
+  {
+    vector<int> cnt(n, 0);
+    for (auto i : a)
+      cnt[i.F.S]++;
+    vector<pair<pair<int, int>, int>> new_a(n);
+    vector<int> p(n, 0);
+    p[0] = 0;
+    for (int i = 1; i < n; i++)
+      p[i] = p[i - 1] + cnt[i - 1];
+    for (auto i : a)
+    {
+      int x = i.F.S;
+      new_a[p[x]] = i;
+      p[x]++;
+    }
+    a = new_a;
+  }
+
+  {
+    vector<int> cnt(n, 0);
+    for (auto i : a)
+      cnt[i.F.F]++;
+    vector<pair<pair<int, int>, int>> new_a(n);
+    vector<int> p(n, 0);
+    p[0] = 0;
+    for (int i = 1; i < n; i++)
+      p[i] = p[i - 1] + cnt[i - 1];
+    for (auto i : a)
+    {
+      int x = i.F.F;
+      new_a[p[x]] = i;
+      p[x]++;
+    }
+    a = new_a;
+  }
+}
+int main()
 {
    string s; cin>>s; s+='$';
    int n=s.length();
@@ -23,7 +67,7 @@ void solve()
      {
       a[i]={{c[i],c[(i+(1<<k))%n]},i};
      }
-     sort(a.begin(),a.end());
+      radix_sort(a);
       for(int i=0;i<n;i++)p[i]=a[i].S;
     c[p[0]]=0;
     for(int i=1;i<n;i++)
@@ -33,5 +77,23 @@ void solve()
     }
     k++;
    }
-   for(int i=0;i<n;i++) cout<<p[i]<<' ';
+ 
+  int q;
+  cin>>q;
+  while(q--)
+  {
+    string qs; cin>>qs;
+    int l=0,r=n-1,m;
+    bool ok=0;
+     while (l <= r) {
+        int m = (l + r) / 2;
+        int cmp = s.compare(p[m], qs.size(), qs);  //binary search to check a substring present or not
+        if (cmp == 0) { ok=1; break;}
+        if (cmp < 0)
+            l = m + 1;
+        else
+            r = m - 1;
+    }
+ cout<<(ok?"Yes":"No")<<endl;
+}
 }
