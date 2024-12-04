@@ -1,0 +1,26 @@
+string booth_algo(string &s) //find laxicographically minimal by rotation
+{
+  int n=s.length();
+  string new_s=s+s;
+  vector<int>fail(2*n,-1);
+  int k=0; //minimum indicator
+  for(int j=1;j<2*n;j++)
+  {
+    char current_char=new_s[j];
+    int i=fail[j-k-1];
+    while(i!=-1 and current_char!=new_s[k+i+1])
+    {
+        if(current_char<new_s[k+i+1])
+        {
+          k=j-i-1;//smaller rotation found
+        } i=fail[i];
+    }
+    if(current_char != new_s[k+i+1])
+    {
+      if(current_char<new_s[k+i+1])k=j;
+      fail[j-k]=-1;
+    }
+    else fail[j-k]=i+1;
+  }
+    return new_s.substr(k,n);
+}
