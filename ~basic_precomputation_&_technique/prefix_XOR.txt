@@ -1,0 +1,2 @@
+for(int i=0;i<n;i++){ pre[i+1]=pre[i]^a[i];} // prefix xor in c++
+  cout<< (pre[l]^pre[r] )<<endl; //to get xor from l to r

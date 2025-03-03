@@ -1,0 +1,62 @@
+struct stck
+{
+    vll v,vg={0};
+    void push(ll x)
+    {
+      v.pb(x);
+      vg.pb(__gcd(x,vg.back()));
+    }
+    ll pop(){
+      ll res=v.back(); 
+      v.pop_back();
+      vg.pop_back();
+      return res;
+    }
+    bool empty(){return v.empty();}
+    ll gcd()
+    {
+      return vg.back();
+    }
+
+};
+struct stck s1,s2;
+void remove()
+{
+  if(s1.empty())
+  {
+    while(!s2.empty())
+    {
+      s1.push( s2.pop() );
+    }
+  }
+
+   { s1.pop();
+   } 
+  
+}
+bool good()
+{
+  if(__gcd(s1. gcd(),s2. gcd())==1)return true;
+  return false;
+}
+void solve()
+{
+   ll n,k;
+   cin>>n;
+   vll a(n);
+   in(a);
+  ll l=0,ret=INT_MAX;
+  for(int i=0;i<n;i++)
+  {
+    s2.push(a[i]);
+    while (good())
+    {  
+
+      remove();
+      ret=min(ret,i-l+1); l++;
+    }
+    
+  }
+ if(ret==INT_MAX)cout<<-1<<endl;
+  else cout<<ret<<endl;
+}
