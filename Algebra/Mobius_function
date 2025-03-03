@@ -1,0 +1,35 @@
+int spf[N], mob[N];
+ll dp[N];
+for(int i = 2; i < N; i++)
+        mob[i] = -1;
+    for(int i = 2; i < N; i++) {
+        if(!spf[i]) {
+            for(int j = i; j < N; j += i) {
+                spf[j] = i;
+                mob[j] *= -1;
+            }
+        }
+    }
+ 
+    for(int i = 2; i * i < N; i++) {
+        if(spf[i] == i) {
+            for(int j = i * i; j < N; j +=  i * i)
+                mob[j] = 0;
+        }
+    }
+    for(int i = 2; i < N; i++){
+        if(mob[i] == 0) continue;
+        for(int j = i; j < N; j += i) {
+            if(mob[j] == 0) continue;
+            divv[j].push_back(i);
+        } 
+    }
+ll prime_mul(int a) {
+        int m = 1;
+        while(a > 1) {
+            int b = spf[a];
+            while(a % b == 0) a /= b; //unique
+            m *= b;
+        }
+        return m;
+    };
