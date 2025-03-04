@@ -1,6 +1,7 @@
 <img src="banner_github.png" alt="GitHub Banner" width="100%" />
 
 # Hello World!,👋🏼:
+![Visitor Count](https://komarev.com/ghpvc/?username=Taleb013&color=blue)
 
 
 # 💻 Tech Stack:
