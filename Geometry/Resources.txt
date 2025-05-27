@@ -1,0 +1,4 @@
+https://www.geeksforgeeks.org/orientation-3-ordered-points/
+https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
+https://cp-algorithms.com/geometry/segments_intersection.html
+https://cses.fi/book/book.pdf
