@@ -1,0 +1,11 @@
+int orientation(Point p, Point q, Point r) {
+    ll val = (q.y - p.y) * (r.x - q.x) - 
+             (q.x - p.x) * (r.y - q.y);
+    if (val == 0) return 0; // colinear
+    return (val > 0) ? 1 : 2; // clock or counterclock wise
+}
+// Check if point q lies on segment pr
+bool onSegment(Point p, Point q, Point r) {
+    return q.x >= min(p.x, r.x) && q.x <= max(p.x, r.x) &&
+           q.y >= min(p.y, r.y) && q.y <= max(p.y, r.y);
+}
