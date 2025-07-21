@@ -1,30 +1,30 @@
-ll t[4*N]; 
-vll a(N);
-void build(int v,int start,int end)
+struct segment_tree
 {
-  if(start==end)
-  {
-    t[v]=a[start]; return;
-  } 
-  int mid=(start+end)/2,left=2*v,right=2*v+1;
-  build(left,start,mid);
-  build(right,mid+1,end);
-  t[v]=t[left]+t[right]; 
-}
-ll query(int v,int l,int r,int start,int end)
+  int n;
+  vector<ll>sum;
+ segment_tree(int n) : n(n),sum(4*n+1,0) {}
+ void build(int node,int l,int r)
 {
-  if(r<start or l>end) return 0LL;
- 
-  if(l>=start and r<=end) return t[v];
-  int mid=(l+r)>>1,left=2*v,right=2*v+1;
-  ll sum= query(left,l,mid,start,end)+query(right,mid+1,r,start,end);
-  return sum;
+  if(l==r) { sum[node]=a[l]; return; }
+  int  mid=(l+r)>>1,left=2*node,right=2*node+1;
+  build(left,l,mid);
+  build(right,mid+1,r);
+  sum[node]=sum[left]+sum[right]; 
 }
-void update(int v,int l,int r,int idx,int val)
+ll query(int node,int l,int r,int ql,int qr)
 {
-    if(l==r) { t[v]=val; return;}
-    int mid=(l+r)/2,left=2*v,right=2*v+1;
-   if(idx<=mid) update(left,l,mid,idx,val);
-   if(idx>mid) update(right,mid+1,r,idx,val);
-    t[v]=t[left]+t[right];
+  if(ql > r or qr < l) return 0LL;
+  if(l>=ql and r<=qr) return sum[node];
+  int  mid=(l+r)>>1,left=2*node,right=2*node+1;
+  ll cur= query(left,l,mid,ql,qr)+query(right,mid+1,r,ql,qr);
+  return cur;
 }
+void update(int node,int l,int r,int idx,int val)
+{
+    if(l==r) { sum[node] += val; return;}
+    int  mid=(l+r)>>1,left=2*node,right=2*node+1;
+    if(idx <= mid) update(left,l,mid,idx,val);
+    else update(right,mid+1,r,idx,val);
+    sum[node] = sum[left]+sum[right];
+}
+};
